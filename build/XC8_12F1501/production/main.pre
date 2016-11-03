@@ -3344,11 +3344,27 @@ if(t < 0 ) return -t;
 if(t >= 0) return t;
 }
 
+unsigned int adconv(void)
+{
+unsigned int temp;
+
+GO_nDONE = 1 ;
+while(GO_nDONE) ;
+temp = ADRESH ;
+temp = ( temp << 8 ) | ADRESL ;
+
+return temp ;
+}
+
 void main(void) {
 
 OSCCON = 0b01111000;
-ANSELA = 0b00000000;
-TRISA = 0b00000000;
+ANSELA = 0b00000100;
+TRISA = 0b00000100;
+PORTA = 0b00000000;
+ADCON0 = 0b00001001;
+_delay((unsigned long)((5)*(16000000/4000000.0)));
+ADCON1 = 0b10010000;
 
 while(1) {
 RA0 = RA3;

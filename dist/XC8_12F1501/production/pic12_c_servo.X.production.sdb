@@ -7,20 +7,32 @@
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 /Applications/microchip/xc8/v1.38/sources/common/ftadd.c
 [v ___ftadd __ftadd `(f  1 e 3 0 ]
-"34 /Users/imai/MPLABXProjects/pic12_c_servo.X/main.c
+"46 /Users/imai/MPLABXProjects/pic12_c_servo.X/main.c
 [v _main main `(v  1 e 1 0 ]
-"859 /Applications/microchip/xc8/v1.38/include/pic12f1501.h
+"414 /Applications/microchip/xc8/v1.38/include/pic12f1501.h
+[v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"859
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1194
 [v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1297
+[v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
+"1316
+[v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
+"1335
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"1414
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
 "1940
 [v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"5975
+[v _GO_nDONE GO_nDONE `VEb  1 e 0 @1257 ]
 "6503
 [v _RA0 RA0 `VEb  1 e 0 @96 ]
 "6509
 [v _RA3 RA3 `VEb  1 e 0 @99 ]
-"34 /Users/imai/MPLABXProjects/pic12_c_servo.X/main.c
+"46 /Users/imai/MPLABXProjects/pic12_c_servo.X/main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"44
+"60
 } 0

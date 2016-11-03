@@ -3,13 +3,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 "152 /Applications/microchip/xc8/v1.38/include/pic.h
 [v __delay `JF2466 ~T0 @X0 0 e ]
 [p i __delay ]
+"5975 /Applications/microchip/xc8/v1.38/include/pic12f1501.h
+[v _GO_nDONE `Vb ~T0 @X0 0 e@1257 ]
+"1316
+[v _ADRESH `Vuc ~T0 @X0 0 e@156 ]
+"1297
+[v _ADRESL `Vuc ~T0 @X0 0 e@155 ]
 [p mainexit ]
-"1194 /Applications/microchip/xc8/v1.38/include/pic12f1501.h
+"1194
 [v _OSCCON `Vuc ~T0 @X0 0 e@153 ]
 "1940
 [v _ANSELA `Vuc ~T0 @X0 0 e@396 ]
 "859
 [v _TRISA `Vuc ~T0 @X0 0 e@140 ]
+"414
+[v _PORTA `Vuc ~T0 @X0 0 e@12 ]
+"1335
+[v _ADCON0 `Vuc ~T0 @X0 0 e@157 ]
+"1414
+[v _ADCON1 `Vuc ~T0 @X0 0 e@158 ]
 "6503
 [v _RA0 `Vb ~T0 @X0 0 e@96 ]
 "6509
@@ -2506,35 +2518,82 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 295 ]
 }
 "34
-[v _main `(v ~T0 @X0 1 ef ]
+[v _adconv `(ui ~T0 @X0 1 ef ]
+"35
 {
-[; ;main.c: 34: void main(void) {
-[e :U _main ]
+[; ;main.c: 34: unsigned int adconv(void)
+[; ;main.c: 35: {
+[e :U _adconv ]
 [f ]
-[; ;main.c: 36: OSCCON = 0b01111000;
 "36
-[e = _OSCCON -> -> 120 `i `uc ]
-[; ;main.c: 37: ANSELA = 0b00000000;
-"37
-[e = _ANSELA -> -> 0 `i `uc ]
-[; ;main.c: 38: TRISA = 0b00000000;
+[v _temp `ui ~T0 @X0 1 a ]
+[; ;main.c: 36: unsigned int temp;
+[; ;main.c: 38: GO_nDONE = 1 ;
 "38
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;main.c: 40: while(1) {
-"40
+[e = _GO_nDONE -> -> 1 `i `b ]
+[; ;main.c: 39: while(GO_nDONE) ;
+"39
+[e $U 299  ]
 [e :U 300 ]
-{
-[; ;main.c: 41: RA0 = RA3;
-"41
-[e = _RA0 _RA3 ]
-"43
-}
 [e :U 299 ]
-"40
-[e $U 300  ]
+[e $ _GO_nDONE 300  ]
 [e :U 301 ]
-[; ;main.c: 43: };
+[; ;main.c: 40: temp = ADRESH ;
+"40
+[e = _temp -> _ADRESH `ui ]
+[; ;main.c: 41: temp = ( temp << 8 ) | ADRESL ;
+"41
+[e = _temp | << _temp -> 8 `i -> _ADRESL `ui ]
+[; ;main.c: 43: return temp ;
+"43
+[e ) _temp ]
+[e $UE 298  ]
 [; ;main.c: 44: }
 "44
 [e :UE 298 ]
+}
+"46
+[v _main `(v ~T0 @X0 1 ef ]
+{
+[; ;main.c: 46: void main(void) {
+[e :U _main ]
+[f ]
+[; ;main.c: 48: OSCCON = 0b01111000;
+"48
+[e = _OSCCON -> -> 120 `i `uc ]
+[; ;main.c: 49: ANSELA = 0b00000100;
+"49
+[e = _ANSELA -> -> 4 `i `uc ]
+[; ;main.c: 50: TRISA = 0b00000100;
+"50
+[e = _TRISA -> -> 4 `i `uc ]
+[; ;main.c: 51: PORTA = 0b00000000;
+"51
+[e = _PORTA -> -> 0 `i `uc ]
+[; ;main.c: 52: ADCON0 = 0b00001001;
+"52
+[e = _ADCON0 -> -> 9 `i `uc ]
+[; ;main.c: 53: _delay((unsigned long)((5)*(16000000/4000000.0)));
+"53
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 16000000 `l `d .4000000.0 `ul ]
+[; ;main.c: 54: ADCON1 = 0b10010000;
+"54
+[e = _ADCON1 -> -> 144 `i `uc ]
+[; ;main.c: 56: while(1) {
+"56
+[e :U 304 ]
+{
+[; ;main.c: 57: RA0 = RA3;
+"57
+[e = _RA0 _RA3 ]
+"59
+}
+[e :U 303 ]
+"56
+[e $U 304  ]
+[e :U 305 ]
+[; ;main.c: 59: };
+[; ;main.c: 60: }
+"60
+[e :UE 302 ]
 }

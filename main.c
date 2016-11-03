@@ -31,11 +31,27 @@ static int abs(int t) {
     if(t >= 0) return t;
 }
 
+unsigned int adconv(void)
+{
+     unsigned int temp;
+
+     GO_nDONE = 1 ;         // PICにアナログ値読取り開始を指示
+     while(GO_nDONE) ;      // PICが読取り完了するまで待つ
+     temp = ADRESH ;        // PICは読取った値をADRESHとADRESLのレジスターにセットする
+     temp = ( temp << 8 ) | ADRESL ;  // 10ビットの分解能力です
+
+     return temp ;
+}
+
 void main(void) {
     
     OSCCON = 0b01111000; // internal clock 16MHz
-    ANSELA = 0b00000000; // analog input all off
-    TRISA = 0b00000000; // RA0,RA1,RA2,RA4,RA5 output / RA3 input only
+    ANSELA = 0b00000100; // analog 2 only on
+    TRISA  = 0b00000100; // RA0,RA1,RA4,RA5 output / RA2,RA3 input
+    PORTA  = 0b00000000; // PORTA ALL LOW OUTPUT
+    ADCON0 = 0b00001001; // AN2 READ
+    __delay_us(5);
+    ADCON1 = 0b10010000; // 001:FOSC/8 , VDD reference
     
     while(1) {
         RA0 = RA3;
