@@ -11,6 +11,12 @@
 [v _main main `(v  1 e 1 0 ]
 "414 /Applications/microchip/xc8/v1.38/include/pic12f1501.h
 [v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"751
+[v _TMR2 TMR2 `VEuc  1 e 1 @26 ]
+"770
+[v _PR2 PR2 `VEuc  1 e 1 @27 ]
+"789
+[v _T2CON T2CON `VEuc  1 e 1 @28 ]
 "859
 [v _TRISA TRISA `VEuc  1 e 1 @140 ]
 "1194
@@ -25,14 +31,28 @@
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
 "1940
 [v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"3160
+[v _PWM3DCL PWM3DCL `VEuc  1 e 1 @1559 ]
+"3195
+[v _PWM3DCH PWM3DCH `VEuc  1 e 1 @1560 ]
+"3264
+[v _PWM3CON PWM3CON `VEuc  1 e 1 @1561 ]
+"3339
+[v _PWM4DCL PWM4DCL `VEuc  1 e 1 @1562 ]
+"3374
+[v _PWM4DCH PWM4DCH `VEuc  1 e 1 @1563 ]
+"3443
+[v _PWM4CON PWM4CON `VEuc  1 e 1 @1564 ]
 "5975
 [v _GO_nDONE GO_nDONE `VEb  1 e 0 @1257 ]
 "6503
 [v _RA0 RA0 `VEb  1 e 0 @96 ]
 "6509
 [v _RA3 RA3 `VEb  1 e 0 @99 ]
+"6589
+[v _TMR2ON TMR2ON `VEb  1 e 0 @226 ]
 "46 /Users/imai/MPLABXProjects/pic12_c_servo.X/main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"60
+"71
 } 0

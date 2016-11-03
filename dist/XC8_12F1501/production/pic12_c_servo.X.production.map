@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=/Applications/microchip/xc8/v1.38/dat/en_msgs.txt -cs \
   -h+dist/XC8_12F1501/production/pic12_c_servo.X.production.sym \
   --cmf=dist/XC8_12F1501/production/pic12_c_servo.X.production.cmf -z \
-  -Q12F1501 -o/tmp/xczk5xO8B \
+  -Q12F1501 -o/tmp/xcqUrpLNK \
   -Mdist/XC8_12F1501/production/pic12_c_servo.X.production.map -E1 -ver=XC8 \
   -ASTACK=02000h-0202fh -pstack=STACK -ACODE=00h-03FFh -ASTRCODE=00h-03FFh \
   -ASTRING=00h-0FFhx4 -ACONST=00h-0FFhx4 -AENTRY=00h-0FFhx4 \
@@ -24,7 +24,7 @@ Linker command line:
   -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pcinit=CODE \
   -pfunctab=CODE -ACONFIG=08007h-08008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=08000h-08003h -pidloc=IDLOC -DIDLOC=2 -DCODE=2 -DSTRCODE=2 \
-  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/xcdhJTYCh.obj \
+  -DSTRING=2 -DCONST=2 -DENTRY=2 -k /tmp/xcQwIKqZb.obj \
   dist/XC8_12F1501/production/pic12_c_servo.X.production.obj 
 
 Object code version is 3.11
@@ -34,13 +34,13 @@ Machine type is 12F1501
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/xcdhJTYCh.obj
+/tmp/xcQwIKqZb.obj
                 end_init                              1        1        1        0       0
                 reset_vec                             0        0        1        0       0
                 config                             8007     8007        2    1000E       0
 dist/XC8_12F1501/production/pic12_c_servo.X.production.obj
                 cinit                               3FE      3FE        2      7FC       0
-                maintext                            3DF      3DF       1F      7BE       0
+                maintext                            3D0      3D0       2E      7A0       0
                 cstackCOMMON                         70       70        1       70       1
 
 TOTAL           Name                               Link     Load   Length     Space
@@ -50,7 +50,7 @@ TOTAL           Name                               Link     Load   Length     Sp
                 end_init                              1        1        1         0
                 cinit                               3FE      3FE        2         0
                 reset_vec                             0        0        1         0
-                maintext                            3DF      3DF       1F         0
+                maintext                            3D0      3D0       2E         0
 
         CLASS   STRCODE        
 
@@ -211,7 +211,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
 
                 reset_vec                      000000  000002  000002         0       0  CODE        2
                 cstackCOMMON                   000070  000001  000071        70       1  COMMON      1
-                maintext                       0003DF  00001F  0003FE       7BE       0  CODE        2
+                maintext                       0003D0  00002E  0003FE       7A0       0  CODE        2
                 cinit                          0003FE  000002  000400       7FC       0  CODE        2
                 config                         008007  000002  008009     1000E       0  CONFIG      2
 
@@ -221,10 +221,10 @@ UNUSED ADDRESS RANGES
         Name                Unused          Largest block    Delta
         BANK0            00020-0004F              30           1
         BIGRAM           02000-0202F              30           1
-        CODE             00002-003DE             3DD           2
+        CODE             00002-003CF             3CE           2
         COMMON           00071-0007D               D           1
-        CONST            00002-003DE             100           2
-        ENTRY            00002-003DE             100           2
+        CONST            00002-003CF             100           2
+        ENTRY            00002-003CF             100           2
         IDLOC            08000-08003               4           2
         RAM              00020-0004F              30           1
         SFR0             00000-0001F              20           1
@@ -260,8 +260,8 @@ UNUSED ADDRESS RANGES
         SFR8             00400-0046F              70           1
         SFR9             00480-004EF              70           1
         STACK            02000-0202F              30           1
-        STRCODE          00002-003DE             3DD           2
-        STRING           00002-003DE             100           2
+        STRCODE          00002-003CF             3CE           2
+        STRING           00002-003CF             100           2
 
                                   Symbol Table
 
@@ -273,8 +273,18 @@ _ANSELA                  (abs)        0018C
 _GO_nDONE                (abs)        004E9
 _OSCCON                  (abs)        00099
 _PORTA                   (abs)        0000C
+_PR2                     (abs)        0001B
+_PWM3CON                 (abs)        00619
+_PWM3DCH                 (abs)        00618
+_PWM3DCL                 (abs)        00617
+_PWM4CON                 (abs)        0061C
+_PWM4DCH                 (abs)        0061B
+_PWM4DCL                 (abs)        0061A
 _RA0                     (abs)        00060
 _RA3                     (abs)        00063
+_T2CON                   (abs)        0001C
+_TMR2                    (abs)        0001A
+_TMR2ON                  (abs)        000E2
 _TRISA                   (abs)        0008C
 __CFG_BOREN$ON           (abs)        00000
 __CFG_BORV$LO            (abs)        00000
@@ -476,9 +486,9 @@ __end_of__initialization cinit        003FE
 __end_of_main            maintext     003FE
 __initialization         cinit        003FE
 __pcstackCOMMON          cstackCOMMON 00070
-__pmaintext              maintext     003DF
+__pmaintext              maintext     003D0
 __size_of_main           (abs)        00000
-_main                    maintext     003DF
+_main                    maintext     003D0
 btemp                    (abs)        0007E
 end_of_initialization    cinit        003FE
 intlevel0                functab      00000
@@ -553,7 +563,7 @@ shared
 shared estimated size: 1
 
 main.c
-		_main          		CODE           	03DF	0000	32
+		_main          		CODE           	03D0	0000	47
 
-main.c estimated size: 32
+main.c estimated size: 47
 

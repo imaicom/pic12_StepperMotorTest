@@ -51,8 +51,19 @@ void main(void) {
     PORTA  = 0b00000000; // PORTA ALL LOW OUTPUT
     ADCON0 = 0b00001001; // AN2 READ
     __delay_us(5);
-    ADCON1 = 0b10010000; // 001:FOSC/8 , VDD reference
+    ADCON1 = 0b10010000; // 値は右寄せ , 001:FOSC/8 , VDD reference
     
+    PWM4CON = 0b11000000 ; // PWM4機能を使用する(output is active-high)
+    PWM4DCH = 0 ;          // デューティ値は０で初期化
+    PWM4DCL = 0 ;
+    PWM3CON = 0b11000000 ; // PWM3機能を使用する(output is active-high)
+    PWM3DCH = 0 ;          // デューティ値は０で初期化
+    PWM3DCL = 0 ;
+    T2CON   = 0b00000010 ; // TMR2プリスケーラ値を１６倍に設定
+    TMR2    = 0 ;          // タイマー２カウンターを初期化
+    PR2     = 124 ;        // PWMの周期を設定（1000Hzで設定）
+    TMR2ON  = 1 ;          // TMR2(PWM)スタート
+
     while(1) {
         RA0 = RA3;
     

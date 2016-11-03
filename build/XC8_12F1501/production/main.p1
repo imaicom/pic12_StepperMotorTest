@@ -22,6 +22,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADCON0 `Vuc ~T0 @X0 0 e@157 ]
 "1414
 [v _ADCON1 `Vuc ~T0 @X0 0 e@158 ]
+"3443
+[v _PWM4CON `Vuc ~T0 @X0 0 e@1564 ]
+"3374
+[v _PWM4DCH `Vuc ~T0 @X0 0 e@1563 ]
+"3339
+[v _PWM4DCL `Vuc ~T0 @X0 0 e@1562 ]
+"3264
+[v _PWM3CON `Vuc ~T0 @X0 0 e@1561 ]
+"3195
+[v _PWM3DCH `Vuc ~T0 @X0 0 e@1560 ]
+"3160
+[v _PWM3DCL `Vuc ~T0 @X0 0 e@1559 ]
+"789
+[v _T2CON `Vuc ~T0 @X0 0 e@28 ]
+"751
+[v _TMR2 `Vuc ~T0 @X0 0 e@26 ]
+"770
+[v _PR2 `Vuc ~T0 @X0 0 e@27 ]
+"6589
+[v _TMR2ON `Vb ~T0 @X0 0 e@226 ]
 "6503
 [v _RA0 `Vb ~T0 @X0 0 e@96 ]
 "6509
@@ -2579,21 +2599,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 54: ADCON1 = 0b10010000;
 "54
 [e = _ADCON1 -> -> 144 `i `uc ]
-[; ;main.c: 56: while(1) {
+[; ;main.c: 56: PWM4CON = 0b11000000 ;
 "56
+[e = _PWM4CON -> -> 192 `i `uc ]
+[; ;main.c: 57: PWM4DCH = 0 ;
+"57
+[e = _PWM4DCH -> -> 0 `i `uc ]
+[; ;main.c: 58: PWM4DCL = 0 ;
+"58
+[e = _PWM4DCL -> -> 0 `i `uc ]
+[; ;main.c: 59: PWM3CON = 0b11000000 ;
+"59
+[e = _PWM3CON -> -> 192 `i `uc ]
+[; ;main.c: 60: PWM3DCH = 0 ;
+"60
+[e = _PWM3DCH -> -> 0 `i `uc ]
+[; ;main.c: 61: PWM3DCL = 0 ;
+"61
+[e = _PWM3DCL -> -> 0 `i `uc ]
+[; ;main.c: 62: T2CON = 0b00000010 ;
+"62
+[e = _T2CON -> -> 2 `i `uc ]
+[; ;main.c: 63: TMR2 = 0 ;
+"63
+[e = _TMR2 -> -> 0 `i `uc ]
+[; ;main.c: 64: PR2 = 124 ;
+"64
+[e = _PR2 -> -> 124 `i `uc ]
+[; ;main.c: 65: TMR2ON = 1 ;
+"65
+[e = _TMR2ON -> -> 1 `i `b ]
+[; ;main.c: 67: while(1) {
+"67
 [e :U 304 ]
 {
-[; ;main.c: 57: RA0 = RA3;
-"57
+[; ;main.c: 68: RA0 = RA3;
+"68
 [e = _RA0 _RA3 ]
-"59
+"70
 }
 [e :U 303 ]
-"56
+"67
 [e $U 304  ]
 [e :U 305 ]
-[; ;main.c: 59: };
-[; ;main.c: 60: }
-"60
+[; ;main.c: 70: };
+[; ;main.c: 71: }
+"71
 [e :UE 302 ]
 }
