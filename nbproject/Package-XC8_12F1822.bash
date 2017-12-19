@@ -6,7 +6,7 @@
 
 # Macros
 TOP=`pwd`
-CND_CONF=XC8_12F1501
+CND_CONF=XC8_12F1822
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging

@@ -3,22 +3,39 @@
 #include <stdbool.h>       /* For true/false definition */
 #include <pic.h>
 
-#pragma config FOSC = INTOSC    // INTOSC=内部クロックを使用し、CLKINピン(RA5)はデジタルピンとする
+// CONFIG1
+#pragma config FOSC = INTOSC    // INTOSC= 内部クロックを使用し、CLKINピン(RA5)はデジタルピンとする
 #pragma config WDTE = OFF       // ウォッチドッグタイマを無効にする
-#pragma config PWRTE = ON      // 電源ONから64ms後にプログラムを開始する
+#pragma config PWRTE = ON       // ON = 電源ONから64ms後にプログラムを開始する
 #pragma config MCLRE = OFF      // ピンはデジタル入力ピン(RA3)として機能する
 #pragma config CP = OFF         // プログラムメモリーの保護はしない
-#pragma config BOREN = ON       // 電源電圧がBORVより下がったらリセットを行う
-#pragma config CLKOUTEN = OFF   // CLKOUTﾋﾟﾝは無効、RA4として使用する
+#pragma config CPD = OFF        // データメモリーの保護はしない
+#pragma config BOREN = ON       // 電源電圧降下常時監視機能は有効とする
+#pragma config CLKOUTEN = OFF   // CLKOUTピンは無効、RA4ピンとして使用する
+#pragma config IESO = ON        // 内部から外部クロックへの切替えで起動を行う
+#pragma config FCMEN = OFF      // 外部クロックの監視はしない
 
-#pragma config WRT = OFF        // 1KWのフラッシュメモリ自己書き込み保護しない
+// CONFIG2
+#pragma config WRT = OFF        // 2KWのフラッシュメモリ自己書き込み保護ビットを保護しない
+// #pragma config PLLEN = ON       // 4xPLLを動作させる(クロックを32MHzで動作させる場合に使用)
 #pragma config STVREN = ON      // スタックがオーバフローやアンダーフローしたらリセットを行う
 #pragma config BORV = LO        // リセット電圧(VBOR)のトリップポイントを低(1.9V)に設定する
-#pragma config LPBOR = OFF      // 低消費電力ブラウンアウトリセットは無効とする
-#pragma config LVP = ON         // 低電圧プログラミングを行う(RA3のI/Oピンは使用不可)
+#pragma config LVP = OFF         // 低電圧プログラミングしない
 
 #define MHz 000000
-#define _XTAL_FREQ 16MHz
+#define _XTAL_FREQ 8MHz
+
+// PICKIT3 Setting
+//
+// Program Options
+//   Erase All Before Program [*]
+//   Program Speed [2(fastest)]
+//   Enable Low Voltage Programming [ ]
+//   Programming Method [Apply Vdd before Vpp]
+//
+// Power
+//   Power target circuit from PICkit3 [*]
+//   Voltage Level [4.5]
 
 static void Delay_ms(unsigned int DELAY_CNT) {
     for (unsigned int i = 0; i < DELAY_CNT; i++) {
@@ -45,28 +62,20 @@ unsigned int adconv(void)
 
 void main(void) {
     
-    OSCCON = 0b01111000; // internal clock 16MHz
-    ANSELA = 0b00000100; // analog 2 only on
-    TRISA  = 0b00000100; // RA0,RA1,RA4,RA5 output / RA2,RA3 input
-    PORTA  = 0b00000000; // PORTA ALL LOW OUTPUT
-    ADCON0 = 0b00001001; // AN2 READ
-    __delay_us(5);
-    ADCON1 = 0b10010000; // 値は右寄せ , 001:FOSC/8 , VDD reference
-    
-//    PWM4CON = 0b11000000 ; // PWM4機能を使用する(output is active-high)
-//    PWM4DCH = 0 ;          // デューティ値は０で初期化
-//    PWM4DCL = 0 ;
-//    PWM3CON = 0b11000000 ; // PWM3機能を使用する(output is active-high)
-//    PWM3DCH = 0 ;          // デューティ値は０で初期化
-//    PWM3DCL = 0 ;
-//    T2CON   = 0b00000010 ; // TMR2プリスケーラ値を１６倍に設定
-//    TMR2    = 0 ;          // タイマー２カウンターを初期化
-//    PR2     = 124 ;        // PWMの周期を設定（1000Hzで設定）
-//    TMR2ON  = 1 ;          // TMR2(PWM)スタート
+    unsigned int temp;
 
-    while(1) {
-        RA0 = RA3;
+    OSCCON = 0b01110010; // 内部クロックは8MHzとする
+    ANSELA = 0b0000001; // アナログはAN0を使用し、残りをすべてデジタルI/Oに割当
+    TRISA  = 0b00001001; // RA3は入力専用), アナログはAN0を使用
+    ADCON0 = 0b00000001; // アナログ変換情報設定(RA0ポートのAN0から読込む)
+    __delay_us(5);
+    ADCON1 = 0b10010000; // 読取値は右寄せ、A/D変換クロックはFOSC/8、VDDをリファレンスとする
+    Delay_ms(1); // アナログ変換情報が設定されるまでとりあえず待つ (*1:20→5)
     
+    while(1) {
+        temp = adconv();
+        if(temp >  512) {RA1=1; RA2=0;};           
+        if(temp <= 512) {RA1=0; RA2=1;};           
     };
 }
 
