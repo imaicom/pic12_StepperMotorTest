@@ -63,6 +63,9 @@ unsigned int adconv(void)
 void main(void) {
     
     unsigned int temp;
+    int width = 0;
+    int max_width = 0;
+    long int panicTimer = 0;
 
     OSCCON = 0b01110010; // 内部クロックは8MHzとする
     ANSELA = 0b0000001; // アナログはAN0を使用し、残りをすべてデジタルI/Oに割当
@@ -72,10 +75,47 @@ void main(void) {
     ADCON1 = 0b10010000; // 読取値は右寄せ、A/D変換クロックはFOSC/8、VDDをリファレンスとする
     Delay_ms(1); // アナログ変換情報が設定されるまでとりあえず待つ (*1:20→5)
     
+//    while(1) {
+//        temp = adconv();
+//        if(temp >  512) {RA1=1; RA2=0;};           
+//        if(temp <= 512) {RA1=0; RA2=1;};           
+//    };
+    RA2 = 0; RA1 = 0;
+    Delay_ms(1000);
+     
     while(1) {
-        temp = adconv();
-        if(temp >  512) {RA1=1; RA2=0;};           
-        if(temp <= 512) {RA1=0; RA2=1;};           
-    };
-}
+        
+        if((width > 0)&&(RA3 == 0)) {
+            RA2 = 1; RA1 = 1; // Lock
+            max_width = width - 110;
+            width = 0;
+            GO = 1; // start conversion
+            while(nDONE);  // wait conversion
+        };
 
+        if((width == 0)&&(RA3 == 1)) {
+            while(RA3) width++;
+        };
+                   
+        if((35 <= max_width)&&(max_width < 240)) {
+            
+            if(abs(ADRES - max_width) > 25) {//30
+                panicTimer = 80000;// 20000 40000
+            };
+            
+            panicTimer--;if (panicTimer < 0) panicTimer = 0;
+            
+            if((abs(ADRES - max_width) > 15)&&(panicTimer > 0)) {
+                
+                if(ADRES > max_width) {
+                    RA2 = 1; RA1 = 0;
+                } else {
+                    RA2 = 0; RA1 = 1;
+                };
+                
+            } else {RA2 = 1; RA1 = 1;}; // lock // if(abs(ADRES - max_width) > 15)
+            
+         } else {RA2 = 0; RA1 = 0;}; // free // if((35 <= max_width)&&(max_width < 240))
+        
+    };  //  while(1)
+} // main
