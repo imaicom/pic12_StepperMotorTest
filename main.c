@@ -67,6 +67,7 @@ void main(void) {
     int max_width = 0;
     long int panicTimer = 0;
 
+ //   OSCCON  = 0b01110000; // 内部クロックを32MHzとする
     OSCCON = 0b01110010; // 内部クロックは8MHzとする
     ANSELA = 0b0000001; // アナログはAN0を使用し、残りをすべてデジタルI/Oに割当
     TRISA  = 0b00001001; // RA3は入力専用, アナログはAN0を使用
