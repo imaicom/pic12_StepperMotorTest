@@ -82,17 +82,23 @@ void main(void) {
 //        if(temp <= 512) {RA1=0; RA2=1;};           
 //    };
     RA2 = 0; RA1 = 0;
+    RA5 = 0; RA4 = 0;
+    
     Delay_ms(1000);
      
     while(1) {
         
         if((width > 0)&&(RA3 == 0)) {
             RA2 = 1; RA1 = 1; // Lock
+            RA5 = 1; RA4 = 1; // Lock
             max_width = width - 110;
             width = 0;
             GO = 1; // start conversion
             while(nDONE);  // wait conversion
         };
+        
+        temp = ADRESH ;        // PICは読取った値をADRESHとADRESLのレジスターにセットする
+        temp = ( temp << 8 ) | ADRESL ;  // 10ビットの分解能力です
 
         if((width == 0)&&(RA3 == 1)) {
             while(RA3) width++;
@@ -100,23 +106,25 @@ void main(void) {
                    
         if((35 <= max_width)&&(max_width < 240)) {
             
-            if(abs(ADRES - max_width) > 25) {//30
+            if(abs(temp - max_width) > 25) {//30
                 panicTimer = 80000;// 20000 40000
             };
             
             panicTimer--;if (panicTimer < 0) panicTimer = 0;
             
-            if((abs(ADRES - max_width) > 15)&&(panicTimer > 0)) {
+            if((abs(temp - max_width) > 15)&&(panicTimer > 0)) {
                 
-                if(ADRES > max_width) {
+                if(temp > max_width) {
                     RA2 = 1; RA1 = 0;
+                    RA5 = 1; RA4 = 0;
                 } else {
                     RA2 = 0; RA1 = 1;
+                    RA5 = 0; RA4 = 1;
                 };
                 
-            } else {RA2 = 1; RA1 = 1;}; // lock // if(abs(ADRES - max_width) > 15)
+            } else {RA2 = 1; RA1 = 1;RA5 = 1; RA4 = 1;}; // lock // if(abs(ADRES - max_width) > 15)
             
-         } else {RA2 = 0; RA1 = 0;}; // free // if((35 <= max_width)&&(max_width < 240))
+         } else {RA2 = 0; RA1 = 0;RA5 = 0; RA4 = 0;}; // free // if((35 <= max_width)&&(max_width < 240))
         
     };  //  while(1)
 } // main
