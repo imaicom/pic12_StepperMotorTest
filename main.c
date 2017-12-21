@@ -63,6 +63,7 @@ unsigned int adconv(void)
 void main(void) {
     
     unsigned int temp;
+    unsigned int addat;
     int width = 0;
     int max_width = 0;
     long int panicTimer = 0;
@@ -97,8 +98,8 @@ void main(void) {
             while(nDONE);  // wait conversion
         };
         
-        temp = ADRESH ;        // PICは読取った値をADRESHとADRESLのレジスターにセットする
-        temp = ( temp << 8 ) | ADRESL ;  // 10ビットの分解能力です
+        addat = ADRESH ;        // PICは読取った値をADRESHとADRESLのレジスターにセットする
+        addat = ( addat << 8 ) | ADRESL ;  // 10ビットの分解能力です
 
         if((width == 0)&&(RA3 == 1)) {
             while(RA3) width++;
@@ -106,15 +107,15 @@ void main(void) {
                    
         if((35 <= max_width)&&(max_width < 240)) {
             
-            if(abs(temp - max_width) > 25) {//30
+            if(abs(addat - max_width) > 25) {//30
                 panicTimer = 80000;// 20000 40000
             };
             
             panicTimer--;if (panicTimer < 0) panicTimer = 0;
             
-            if((abs(temp - max_width) > 15)&&(panicTimer > 0)) {
+            if((abs(addat - max_width) > 15)&&(panicTimer > 0)) {
                 
-                if(temp > max_width) {
+                if(addat > max_width) {
                     RA2 = 1; RA1 = 0;
                     RA5 = 1; RA4 = 0;
                 } else {
