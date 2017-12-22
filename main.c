@@ -100,6 +100,7 @@ void main(void) {
         
         addat = ADRESH ;        // PICは読取った値をADRESHとADRESLのレジスターにセットする
         addat = ( addat << 8 ) | ADRESL ;  // 10ビットの分解能力です
+        addat = addat/4;
 
         if((width == 0)&&(RA3 == 1)) {
             while(RA3) width++;
