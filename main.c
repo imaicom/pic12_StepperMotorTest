@@ -131,13 +131,13 @@ void main(void) {
                    
         if((5 <= max_width)&&(max_width < 973)) { // 
             
-            if(abs(addat - max_width) > 30) {//30
+            if(abs(addat - max_width) > 60) {//30
                 panicTimer = 80000;// 80000
             };
            
             panicTimer--;if (panicTimer < 0) panicTimer = 0;
             
-            if((abs(addat - max_width) > 25)&&(panicTimer > 0)) {
+            if((abs(addat - max_width) > 30)&&(panicTimer > 0)) {
                 
                 if(addat > max_width) {
                     RA5 = 1; RA4 = 0;
