@@ -131,13 +131,13 @@ void main(void) {
                    
         if((5 <= max_width)&&(max_width < 973)) { // 
             
-            if(abs(addat - max_width) > 25) {//30
-                panicTimer = 80000;// 20000 40000
+            if(abs(addat - max_width) > 30) {//30
+                panicTimer = 80000;// 80000
             };
            
             panicTimer--;if (panicTimer < 0) panicTimer = 0;
             
-            if((abs(addat - max_width) > 15)&&(panicTimer > 0)) {
+            if((abs(addat - max_width) > 25)&&(panicTimer > 0)) {
                 
                 if(addat > max_width) {
                     RA5 = 1; RA4 = 0;
@@ -145,7 +145,7 @@ void main(void) {
                     RA5 = 0; RA4 = 1;
                 };
                 
-            } else {RA5 = 1; RA4 = 1;}; // lock // if(abs(ADRES - max_width) > 15)
+            } else {RA5 = 1; RA4 = 1;}; // lock // if(abs(ADRES - max_width) > 25)
 
         } else {RA5 = 0; RA4 = 0;}; // free // if((5 <= max_width)&&(max_width < 973))
         
