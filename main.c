@@ -71,7 +71,7 @@ void main(void) {
 
  //   OSCCON  = 0b01110000; // 内部クロックを32MHzとする
  //   OSCCON  = 0b01111010; // 内部クロックを16MHzとする
-    OSCCON = 0b01110010; // 内部クロックは8MHzとする
+    OSCCON = 0b01110010; // 内部クロックは8MHzとする PLLEN = ONにて4倍速動作指定済み
     ANSELA = 0b0000001; // アナログはAN0を使用し、残りをすべてデジタルI/Oに割当
     TRISA  = 0b00001001; // RA3は入力専用, アナログはAN0を使用
     ADCON0 = 0b00000001; // アナログ変換情報設定(RA0ポートのAN0から読込む)
@@ -140,9 +140,9 @@ void main(void) {
             if((abs(addat - max_width) > 30)&&(panicTimer > 0)) {
                 
                 if(addat > max_width) {
-                    RA5 = 1; RA4 = 0;
-                } else {
                     RA5 = 0; RA4 = 1;
+                } else {
+                    RA5 = 1; RA4 = 0;
                 };
                 
             } else {RA5 = 1; RA4 = 1;}; // lock // if(abs(ADRES - max_width) > 25)
