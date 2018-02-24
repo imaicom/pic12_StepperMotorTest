@@ -83,12 +83,12 @@ void main(void) {
         if((5 <= max_width)&&(max_width < 973)) {
             
             if((  5 <= max_width)&&(max_width < 399) &&  RA0) {RA5 = 0; RA4 = 1;}; // normal rotation
-            if((  5 <= max_width)&&(max_width < 399) && !RA0) {RA5 = 0; RA4 = 1;}; // lock
+            if((  5 <= max_width)&&(max_width < 399) && !RA0) {RA5 = 1; RA4 = 1;}; // lock
             if((400 <= max_width)&&(max_width < 599)        ) {RA5 = 1; RA4 = 1;}; // lock
-            if((600 <= max_width)&&(max_width < 973) &&  RA0) {RA5 = 1; RA4 = 0;}; // reverse rotation
             if((600 <= max_width)&&(max_width < 973) && !RA0) {RA5 = 1; RA4 = 1;}; // lock
-//            if((600 <= max_width)&&(max_width < 973) &&  RA1) {RA5 = 1; RA4 = 0;}; // reverse rotation
+            if((600 <= max_width)&&(max_width < 973) &&  RA0) {RA5 = 1; RA4 = 0;}; // reverse rotation
 //            if((600 <= max_width)&&(max_width < 973) && !RA1) {RA5 = 1; RA4 = 0;}; // lock
+//            if((600 <= max_width)&&(max_width < 973) &&  RA1) {RA5 = 1; RA4 = 0;}; // reverse rotation
                    
         } else {RA5 = 0; RA4 = 0;}; // free // if((5 <= max_width)&&(max_width < 973))
         
