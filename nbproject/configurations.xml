@@ -17,8 +17,10 @@
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
+      <itemPath>MyConfig.mc3</itemPath>
     </logicalFolder>
-    <itemPath>main.c</itemPath>
+    <itemPath>main-swed.c</itemPath>
+    <itemPath>main-nor.c</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -174,6 +176,16 @@
         <property key="stack-size-main" value="auto"/>
         <property key="stack-type" value="compiled"/>
       </XC8-config-global>
+      <item path="main-nor.c" ex="true" overriding="false">
+      </item>
+      <item path="main-swed.c" ex="false" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-config-global>
+        </XC8-config-global>
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>
