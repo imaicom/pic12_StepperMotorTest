@@ -52,16 +52,11 @@ void main(void) {
  //   OSCCON  = 0b01111010; // 内部クロックを16MHzとする
     OSCCON = 0b01110010; // 内部クロックは8MHzとする PLLEN = ONにて4倍速動作指定済みで結果32MHzとする
     ANSELA = 0b00000000; // アナログAN0は未使用、すべてデジタルI/Oに割当
-    TRISA  = 0b00001001; // RA3は入力専用, 今のところリミットスイッチはRA0のみ使用
-//    TRISA  = 0b00001011; // RA3は入力専用, リミットスイッチはRA1,RA0のみ使用
-    OPTION_REG = 0b00000000; // bit7 WPUx ラッチの値に応じて弱プルアップを有効
-    WPUA = 1; // RA0弱プルアップ
-//    WPUA = 3; // RA1,RA0弱プルアップ
+    TRISA  = 0b00001111; // RA3は入力専用, リミットスイッチはRA2,RA1,RA0を使用
+    OPTION_REG = 0b00000000; // bit7=0 WPUx ラッチの値に応じて弱プルアップを有効
+    WPUA = 0b00000111;  // RA2,RA1,RA0弱プルアップ 10K程度
     
-//    ADCON0 = 0b00000001; // アナログ変換情報設定(RA0ポートのAN0から読込む)
-    __delay_us(5);
-//    ADCON1 = 0b10010000; // 読取値は右寄せ、A/D変換クロックはFOSC/8、VDDをリファレンスとする
-    Delay_ms(1); // アナログ変換情報が設定されるまでとりあえず待つ (*1:20→5)
+    Delay_ms(1); // 設定が安定するまで待つ
 
 //    RA2 = 0; RA1 = 0;
     RA5 = 0; RA4 = 0;
@@ -82,13 +77,11 @@ void main(void) {
                    
         if((5 <= max_width)&&(max_width < 973)) {
             
-            if((  5 <= max_width)&&(max_width < 399) &&  RA0) {RA5 = 0; RA4 = 1;}; // normal rotation
-            if((  5 <= max_width)&&(max_width < 399) && !RA0) {RA5 = 1; RA4 = 1;}; // lock
-            if((400 <= max_width)&&(max_width < 599)        ) {RA5 = 1; RA4 = 1;}; // lock
-            if((600 <= max_width)&&(max_width < 973) && !RA0) {RA5 = 1; RA4 = 1;}; // lock
-            if((600 <= max_width)&&(max_width < 973) &&  RA0) {RA5 = 1; RA4 = 0;}; // reverse rotation
-//            if((600 <= max_width)&&(max_width < 973) && !RA1) {RA5 = 1; RA4 = 0;}; // lock
-//            if((600 <= max_width)&&(max_width < 973) &&  RA1) {RA5 = 1; RA4 = 0;}; // reverse rotation
+            if((  5 <= max_width)&&(max_width < 400) &&  RA2) {RA5 = 0; RA4 = 1;}; // normal rotation
+            if((  5 <= max_width)&&(max_width < 400) && !RA2) {RA5 = 1; RA4 = 1;}; // lock
+            if((400 <= max_width)&&(max_width < 600)        ) {RA5 = 1; RA4 = 1;}; // lock
+            if((600 <= max_width)&&(max_width < 973) && !RA1) {RA5 = 1; RA4 = 1;}; // lock
+            if((600 <= max_width)&&(max_width < 973) &&  RA1) {RA5 = 1; RA4 = 0;}; // reverse rotation
                    
         } else {RA5 = 0; RA4 = 0;}; // free // if((5 <= max_width)&&(max_width < 973))
         
