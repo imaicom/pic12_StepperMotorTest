@@ -74,9 +74,10 @@ void main(void) {
         
         if((width == 0)&&(RA3 == 1)) {
             while(RA3) width++;
-            pulse++; if (pulse > 400) pulse = 0;
         };
-                   
+
+        pulse++; if (pulse > 400) pulse = 0;
+
         if((5 <= max_width)&&(max_width < 973)) {
             
             if((  5 <= max_width)&&(max_width < 450)&&(pulse < 450-max_width))
