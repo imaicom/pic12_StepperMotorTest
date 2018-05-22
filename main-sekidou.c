@@ -48,6 +48,7 @@ void main(void) {
     int width = 0;
     int max_width = 0;
     int pulse = 0;
+    int pulseComp = 0;
 
  //   OSCCON  = 0b01110000; // 内部クロックを32MHzとする
  //   OSCCON  = 0b01111010; // 内部クロックを16MHzとする
@@ -76,17 +77,19 @@ void main(void) {
             while(RA3) width++;
         };
 
-        pulse++; if (pulse > 400) pulse = 0;
+        pulse++; if (pulse > 40) pulse = 0;
 
         if((5 <= max_width)&&(max_width < 973)) {
             
-            if((  5 <= max_width)&&(max_width < 450)&&(pulse < 450-max_width))
-                {RA5 = 0; RA4 = 1;} else {RA5 = 1; RA4 = 1;}; // normal rotation
+            if((  5 <= max_width)&&(max_width < 250)) {RA5 = 0; RA4 = 1;}; // normal rotation
+            if((250 <= max_width)&&(max_width < 450)) {RA5 = 0; RA4 = 1;if(pulse > 38) {RA5 = 0; RA4 = 0;};}; // normal rotation
                 
             if((450 <= max_width)&&(max_width < 550)) {RA5 = 1; RA4 = 1;}; // lock
             
-            if((550 <= max_width)&&(max_width < 973)&&(pulse < max_width-550))
-                {RA5 = 1; RA4 = 0;} else {RA5 = 1; RA4 = 1;}; // reverse rotation
+            if((550 <= max_width)&&(max_width < 750)) {RA5 = 1; RA4 = 0;if(pulse > 38) {RA5 = 0; RA4 = 0;};}; // reverse rotation
+            if((750 <= max_width)&&(max_width < 973)) {RA5 = 1; RA4 = 0;}; // reverse rotation
+            
+//            if(pulse > pulseComp) {RA5 = 1; RA4 = 1;};
                    
         } else {RA5 = 0; RA4 = 0;}; // free // if((5 <= max_width)&&(max_width < 973))
         
