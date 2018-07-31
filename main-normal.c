@@ -57,7 +57,13 @@ void main(void) {
     while(1) {
 //        if(RA2 == 1) {RA1 = 1; RA0 = 0; } else {RA1 = 0; RA0 = 1; };
 //        if(RA3 == 1) {RA5 = 1; RA4 = 0; } else {RA5 = 0; RA4 = 1; };
+        if(i==0) {PORTA = 0b00110000;}
+        if(i==1) {PORTA = 0b00010010;}
+        if(i==2) {PORTA = 0b00000011;}
+        if(i==3) {PORTA = 0b00100001;}
         
+        if(!RA2) {Delay_ms(10); while(!RA2); i++; if(i>3)i=0; };
+        if(!RA3) {Delay_ms(10); while(!RA3); i--; if(i<0)i=3; };
         
     };  //  while(1)
 
