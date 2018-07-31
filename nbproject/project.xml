@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>pic12_c_servo</name>
+            <name>pic12_StepperMotorTest</name>
             <creation-uuid>e2be8078-ad37-4b9c-a4f1-f8883eff8e3a</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=pic12_c_servo.X
+PROJECTNAME=pic12_StepperMotorTest
 
 # Active Configuration
 DEFAULTCONF=XC8_12F1822

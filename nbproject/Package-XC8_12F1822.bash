@@ -10,9 +10,9 @@ CND_CONF=XC8_12F1822
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/pic12_c_servo.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=pic12_c_servo.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=pic12cservo.x/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/pic12_StepperMotorTest.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=pic12_StepperMotorTest.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=pic12steppermotortest/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/pic12cservo.x/bin
+makeDirectory ${TMPDIR}/pic12steppermotortest/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/pic12cservo.x.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/pic12steppermotortest.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/pic12cservo.x.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/pic12steppermotortest.tar *
 checkReturnCode
 
 # Cleanup
