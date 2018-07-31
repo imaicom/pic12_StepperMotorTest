@@ -47,16 +47,18 @@ void main(void) {
     
     int i = 0;
 
-    OSCCON = 0b01110010; // 内部クロックは8MHzとする PLLEN = ONにて4倍速動作指定済み
-    ANSELA = 0b0000000; // アナログ入力は停止、すべてデジタルI/Oに割当
-    TRISA  = 0b0000110; // RA2は入力、RA3は入力専用
+    OSCCON =     0b01110010; // 内部クロックは8MHzとする PLLEN = ONにて4倍速動作指定済み
+    ANSELA =     0b00000000; // アナログ入力は停止、すべてデジタルI/Oに割当
+    TRISA  =     0b00000100; // RA2は入力、RA3は入力専用
+    OPTION_REG = 0b00000010; // プルアップ　オン
+    WPUA =       0b00001100; // RA3とRA2をプルアップ指定
 
-    RA1 = 0; RA0 = 0;
-    RA5 = 0; RA4 = 0;
-        
+    
     while(1) {
+//        if(RA2 == 1) {RA1 = 1; RA0 = 0; } else {RA1 = 0; RA0 = 1; };
+//        if(RA3 == 1) {RA5 = 1; RA4 = 0; } else {RA5 = 0; RA4 = 1; };
+        
         
     };  //  while(1)
 
-    
 } // main
