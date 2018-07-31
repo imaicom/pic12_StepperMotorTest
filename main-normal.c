@@ -55,8 +55,7 @@ void main(void) {
 
     
     while(1) {
-//        if(RA2 == 1) {RA1 = 1; RA0 = 0; } else {RA1 = 0; RA0 = 1; };
-//        if(RA3 == 1) {RA5 = 1; RA4 = 0; } else {RA5 = 0; RA4 = 1; };
+        
         if(i==0) {PORTA = 0b00110000;} // RA5=1;RA4=1;RA1=0;RA0=0;
         if(i==1) {PORTA = 0b00010010;} // RA5=0;RA4=1;RA1=1;RA0=0;
         if(i==2) {PORTA = 0b00000011;} // RA5=0;RA4=0;RA1=1;RA0=1;
