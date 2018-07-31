@@ -61,8 +61,8 @@ void main(void) {
         if(i==2) {PORTA = 0b00000011;} // RA5=0;RA4=0;RA1=1;RA0=1;
         if(i==3) {PORTA = 0b00100001;} // RA5=1;RA4=0;RA1=0;RA0=1;
         
-        if(!RA2) {Delay_ms(10); while(!RA2); i++; if(i>3)i=0; };
-        if(!RA3) {Delay_ms(10); while(!RA3); i--; if(i<0)i=3; };
+        if(!RA2) {while(!RA2)Delay_ms(10); i++; if(i>3)i=0; };
+        if(!RA3) {while(!RA3)Delay_ms(10); i--; if(i<0)i=3; };
         
     };  //  while(1)
 
